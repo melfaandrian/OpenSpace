@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Table\TableCollection;
+use App\Http\Resources\Table\TableResource;
 use App\Model\Table;
 use Illuminate\Http\Request;
 
@@ -47,7 +48,7 @@ class TableController extends Controller
      */
     public function show(Table $table)
     {
-        //
+        return new TableResource($table);
     }
 
     /**
