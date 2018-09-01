@@ -15,7 +15,7 @@ class CreateTablesTable extends Migration
     {
         Schema::create('tables', function (Blueprint $table) {
             $table->string('id', '100')->unique();
-            $table->string('description', '40');
+            $table->string('description', '255');
             $table->timestamps();
         });
     }
