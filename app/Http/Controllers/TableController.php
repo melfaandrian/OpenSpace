@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TableRequest;
 use App\Http\Resources\Table\TableCollection;
 use App\Http\Resources\Table\TableResource;
 use App\Model\Table;
@@ -40,7 +41,7 @@ class TableController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TableRequest $request)
     {
         return "asu";
     }
