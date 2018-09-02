@@ -7,6 +7,7 @@ use App\Http\Resources\Table\TableCollection;
 use App\Http\Resources\Table\TableResource;
 use App\Model\Table;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class TableController extends Controller
 {
@@ -43,7 +44,14 @@ class TableController extends Controller
      */
     public function store(TableRequest $request)
     {
-        return "asu";
+        $table = new Table();
+        $table->id = $request->id;
+        $table->description = $request->description;
+        $table->save();
+
+        return response([
+            'data' => new TableResource($table)
+        ], Response::HTTP_CREATED);
     }
 
     /**
