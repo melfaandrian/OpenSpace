@@ -85,8 +85,11 @@ class TableController extends Controller
      */
     public function update(Request $request, Table $table)
     {
-        //
-    }
+        $table->update($request->all());
+
+        return response([
+            'data' => new TableResource($table)
+        ], Response::HTTP_OK);    }
 
     /**
      * Remove the specified resource from storage.
