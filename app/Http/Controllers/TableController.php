@@ -89,7 +89,8 @@ class TableController extends Controller
 
         return response([
             'data' => new TableResource($table)
-        ], Response::HTTP_OK);    }
+        ], Response::HTTP_OK);
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -99,6 +100,7 @@ class TableController extends Controller
      */
     public function destroy(Table $table)
     {
-        //
+        $table->delete();
+        return response(null , Response::HTTP_NO_CONTENT);
     }
 }
