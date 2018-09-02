@@ -9,8 +9,7 @@ use App\Model\Table;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class TableController extends Controller
-{
+class TableController extends Controller {
 
     public function __construct() {
         $this->middleware('auth:api')->except('index', 'show');
@@ -21,8 +20,7 @@ class TableController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         return TableCollection::collection(Table::paginate(10));
     }
 
@@ -31,8 +29,7 @@ class TableController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -42,8 +39,7 @@ class TableController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TableRequest $request)
-    {
+    public function store(TableRequest $request) {
         $table = new Table();
         $table->id = $request->id;
         $table->description = $request->description;
@@ -60,8 +56,7 @@ class TableController extends Controller
      * @param  \App\Model\Table  $table
      * @return \Illuminate\Http\Response
      */
-    public function show(Table $table)
-    {
+    public function show(Table $table) {
         return new TableResource($table);
     }
 
@@ -71,8 +66,7 @@ class TableController extends Controller
      * @param  \App\Model\Table  $table
      * @return \Illuminate\Http\Response
      */
-    public function edit(Table $table)
-    {
+    public function edit(Table $table) {
         //
     }
 
@@ -83,8 +77,7 @@ class TableController extends Controller
      * @param  \App\Model\Table  $table
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Table $table)
-    {
+    public function update(Request $request, Table $table) {
         $table->update($request->all());
 
         return response([
@@ -98,8 +91,7 @@ class TableController extends Controller
      * @param  \App\Model\Table  $table
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Table $table)
-    {
+    public function destroy(Table $table) {
         $table->delete();
         return response(null , Response::HTTP_NO_CONTENT);
     }

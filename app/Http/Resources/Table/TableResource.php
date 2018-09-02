@@ -4,8 +4,7 @@ namespace App\Http\Resources\Table;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TableResource extends JsonResource
-{
+class TableResource extends JsonResource {
     /**
      * Transform the resource into an array.
      *
