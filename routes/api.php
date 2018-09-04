@@ -7,3 +7,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('/tables','TableController');
+
+Route::group(['prefix' => 'tables'.'/{table}'], function() {
+    Route::apiResource('/occupants','OccupantController');
+});
