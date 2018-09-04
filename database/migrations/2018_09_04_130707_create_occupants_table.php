@@ -17,8 +17,8 @@ class CreateOccupantsTable extends Migration
             $table->increments('id');
             $table->string('table_id', '100');
             $table->foreign('table_id')->references('id')->on('tables')->onDelete('cascade');
-            $table->string('account_id', '20');
-            $table->foreign('table_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('user_id', '20');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('status');
             $table->timestamps();
         });
