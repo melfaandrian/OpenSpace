@@ -12,4 +12,8 @@ class Table extends Model {
     protected $fillable = [
             'description'
         ];
+
+    public function occupants() {
+        return $this->hasMany(Occupant::class);
+    }
 }

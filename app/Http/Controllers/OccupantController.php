@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Occupant\OccupantResource;
 use App\Model\Occupant;
+use App\Model\Table;
 use Illuminate\Http\Request;
 
 class OccupantController extends Controller
@@ -17,6 +19,9 @@ class OccupantController extends Controller
         //
     }
 
+    public function getListOccupantByTableId(Table $table) {
+        return OccupantResource::collection($table->occupants);
+    }
     /**
      * Show the form for creating a new resource.
      *
