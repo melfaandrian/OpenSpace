@@ -31,12 +31,20 @@ class OccupantController extends Controller
         $occupant = new Occupant();
         $occupant->table_id = $table->id;
         $occupant->user_id = Auth::id();
-        $occupant->status = 1;
+        $occupant->status = true;
         $occupant->save();
 
         return response([
             'data' => new OccupantResource($occupant)
         ], Response::HTTP_CREATED);
+    }
+
+    public function releaseTable(Request $request, Table $table, Occupant $occupant) {
+        $occupant->update(['status' => false]);
+
+        return response([
+            'data' => new OccupantResource($occupant)
+        ], Response::HTTP_OK);
     }
 
     private function isOccupied(Table $table) {

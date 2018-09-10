@@ -11,4 +11,5 @@ Route::apiResource('/tables','TableController');
 Route::group(['prefix' => 'tables'.'/{table}'], function() {
     Route::get('/occupants', 'OccupantController@getListOccupantByTableId');
     Route::post('/occupants', 'OccupantController@occupyTable');
+    Route::put('/occupants/{occupant}', 'OccupantController@releaseTable');
 });
