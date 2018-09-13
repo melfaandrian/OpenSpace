@@ -22,7 +22,7 @@ class OccupantController extends Controller
     }
 
     public function occupyTable(Request $request, Table $table) {
-        if($this->isOccupied($table)) {
+        if ($this->isOccupied($table)) {
             return response()->json([
                 'errors' => 'This table has been occupied'
             ],Response::HTTP_BAD_REQUEST);
@@ -40,7 +40,13 @@ class OccupantController extends Controller
     }
 
     public function releaseTable(Request $request, Table $table, Occupant $occupant) {
-        $occupant->update(['status' => false]);
+        if (!$this->isUserTable($occupant)) {
+            return response()->json([
+                'errors' => 'You are not authorize to release this table!!!'
+            ],Response::HTTP_BAD_REQUEST);
+        }
+
+        $occupant->update(['status' => true]);
 
         return response([
             'data' => new OccupantResource($occupant)
@@ -52,5 +58,9 @@ class OccupantController extends Controller
             ->where(['table_id' => $table->id, 'status' => 1])->count();
 
         return $totalOccupant > 0 ? true : false;
+    }
+
+    private function isUserTable(Occupant $occupant) {
+        return Auth::id() == $occupant->user_id ? true : false;
     }
 }
