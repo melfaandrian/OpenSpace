@@ -6,13 +6,32 @@ use App\Http\Requests\TableRequest;
 use App\Http\Resources\Table\TableCollection;
 use App\Http\Resources\Table\TableResource;
 use App\Model\Table;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class TableController extends Controller {
 
     public function __construct() {
-        $this->middleware('auth:api')->except('index', 'show');
+        $this->middleware('auth:api')->except('index', 'show', 'viewTable');
+    }
+
+    public function viewTable() {
+        $client = new Client([
+            'base_uri' => 'http://localhost:8000',
+            'defaults' => [
+                'exceptions' => false
+            ]
+        ]);
+
+        $api_response = $client->get('/api/tables', [
+            'header' => [
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
+            ]
+        ]);
+        $response = json_decode($api_response);
+        return view('table.index', compact('response'));
     }
 
     /**
